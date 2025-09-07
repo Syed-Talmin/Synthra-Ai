@@ -107,7 +107,7 @@ const Sidebar = () => {
       <div>
 
         <div className="flex items-center gap-2 w-full mb-10">
-          <img className="w-12 h-12" src="public/AI Logo.png" alt="Logo" />
+          <img className="w-12 h-12" src="/AI LOGO.png" alt="Logo" />
         </div>
 
         <button
