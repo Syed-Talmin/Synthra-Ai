@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-app.use(express.static(path.join(__dirname, "public")));
+const publicPath = path.join(__dirname, "../public");
+app.use(express.static(publicPath));
 
 app.use("/auth", authRouter);
 app.use("/chat", chatRouter);
@@ -22,7 +23,7 @@ app.use("/message", messageRouter);
 
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 export default app;
