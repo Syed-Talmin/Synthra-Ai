@@ -11,7 +11,7 @@ const Input = ({ onSend }) => {
   };
 
   return (
-    <div className="w-full max-w-[50rem] flex items-center gap-3 p-3 bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-lg mb-10">
+    <div className="w-full max-w-[50rem] flex items-center gap-3 md:p-3 p-1 bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-lg mb-10">
       <input
         type="text"
         placeholder="Type a message..."
@@ -24,7 +24,7 @@ const Input = ({ onSend }) => {
         onClick={handleSend}
         className="p-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white transition-all shadow-md hover:shadow-orange-500/30"
       >
-        <Send className="w-5 h-5" />
+        <Send className="md:w-5 md:h-5 w-3 h-3" />
       </button>
     </div>
   );

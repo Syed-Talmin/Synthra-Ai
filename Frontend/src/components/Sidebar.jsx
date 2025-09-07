@@ -7,6 +7,7 @@ import InputPopup from "./InputPopup";
 import { Ellipsis, Pencil, Trash, Trash2 } from "lucide-react";
 import PopUpWrapper from "./popUpWrapper";
 import { setChats } from "../slices/chatsSlice";
+import { Plus } from "lucide-react";
 
 const Sidebar = () => {
   const chats = useSelector((state) => state.chats.items);
@@ -55,8 +56,8 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`relative h-screen flex flex-col justify-between bg-[#1A1A1A] text-orange-500 font-bold text-2xl p-3 transition-all duration-300
-        ${collapsed ? "w-[5rem]" : "w-[20rem]"}`}
+      className={` h-screen flex flex-col justify-between bg-[#1A1A1A] border border-[#2A2A2A] text-orange-500 font-bold text-2xl p-3 transition-all duration-300
+        ${collapsed ? "relative md:w-[5rem] w-[4rem]" : "md:w-[20rem] fixed top-0 z-99 left-0 w-[15rem]"}`}
     >
 
       
@@ -107,17 +108,19 @@ const Sidebar = () => {
       <div>
 
         <div className="flex items-center gap-2 w-full mb-10">
-          <img className="w-12 h-12" src="/AI LOGO.png" alt="Logo" />
+          <img className="md:w-12 md:h-12 h-8 w-8" src="/AI LOGO.png" alt="Logo" />
         </div>
 
         <button
           onClick={() => setShowCreatePopup(true)}
           className={`mt-5 font-semibold text-white py-2 px-4  rounded-lg text-lg flex items-center justify-center transition-all duration-300 ease-in-out transform
             bg-gradient-to-r from-orange-500 to-orange-600 shadow-md hover:shadow-orange-500/40 hover:scale-105 active:scale-95
-            ${collapsed ? "w-[3rem] h-[3rem] rounded-full" : "w-[90%]"}`}
+            ${collapsed ? "md:w-[3rem] md:h-[3rem] h-8 w-8 rounded-full" : "w-[90%]"}`}
         >
           {collapsed ? (
-            <span className="text-2xl font-bold">+</span>
+            <span className="text-2xl font-bold">
+              <Plus className="md:w-5 md:h-5 w-3 h-3" />
+            </span>
           ) : (
             "New Chat"
           )}
@@ -127,7 +130,7 @@ const Sidebar = () => {
         <ul
           className={`mt-5 ${
             collapsed ? "w-full" : "w-[90%]"
-          } h-[70vh] text-[1.1rem] font-normal overflow-hidden`}
+          } h-[65vh] text-[1.1rem] font-normal overflow-hidden`}
         >
           {chats.map((chat) => (
             <li
@@ -185,7 +188,7 @@ const Sidebar = () => {
 
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="text-white bg-orange-500 py-2 px-3 rounded-lg text-sm mb-15"
+        className="text-white bg-orange-500 py-2 px-3 rounded-lg text-sm mb-5"
       >
         {collapsed ? "»" : "«"}
       </button>

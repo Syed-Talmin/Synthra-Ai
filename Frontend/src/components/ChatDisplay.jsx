@@ -21,10 +21,10 @@ const ChatDisplay = ({ messages }) => {
     <div ref={chatRef} className="flex flex-col w-full max-w-[50rem] py-2 ">
       {messages.length === 0 ? (
         <div className="flex w-full items-center justify-center flex-col">
-          <h1 className="text-[5vw] opacity-50 leading-tight text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-orange-500 to-orange-800">
+          <h1 className="md:text-[5vw] text-[2rem] opacity-50 leading-tight text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-orange-500 to-orange-800">
             SYNTHRA
           </h1>
-          <p className="text-white text-sm opacity-55 uppercase font-semibold">
+          <p className="text-white text-center md:text-sm text-xs opacity-55 uppercase font-semibold">
             Type a message to start a beautiful conversation
           </p>
         </div>
