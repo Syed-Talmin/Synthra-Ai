@@ -185,7 +185,7 @@ const Sidebar = () => {
 
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="text-white bg-orange-500 py-2 px-3 rounded-lg text-sm"
+        className="text-white bg-orange-500 py-2 px-3 rounded-lg text-sm mb-15"
       >
         {collapsed ? "»" : "«"}
       </button>

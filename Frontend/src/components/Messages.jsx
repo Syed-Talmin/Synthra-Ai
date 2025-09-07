@@ -44,7 +44,7 @@ const Messages = () => {
 
   return (
     <div
-      className={`relative w-full h-screen bg-[#1A1A1A] border border-[#2A2A2A] flex flex-col items-center justify-center pt-20`}
+      className={`relative w-full h-screen bg-[#1A1A1A] border border-[#2A2A2A] flex flex-col items-center justify-center py-20 px-5`}
     >
       <Navbar />
       <div className="w-full flex flex-col items-center justify-center">
