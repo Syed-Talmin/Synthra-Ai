@@ -21,7 +21,7 @@ app.use("/auth", authRouter);
 app.use("/chat", chatRouter);
 app.use("/message", messageRouter);
 
-app.get("*", (req, res) => {
+app.get("*name", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
