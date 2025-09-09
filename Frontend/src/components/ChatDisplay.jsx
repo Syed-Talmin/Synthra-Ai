@@ -18,7 +18,7 @@ const ChatDisplay = ({ messages }) => {
   }, [messages]);
   
   return (
-    <div ref={chatRef} className="flex flex-col w-full max-w-[50rem] py-2 ">
+    <div ref={chatRef} className="flex flex-col w-full max-w-[50rem] py-2 pt-25">
       {messages.length === 0 ? (
         <div className="flex w-full items-center justify-center flex-col">
           <h1 className="md:text-[5vw] text-[2rem] opacity-50 leading-tight text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-orange-500 to-orange-800">
@@ -29,7 +29,7 @@ const ChatDisplay = ({ messages }) => {
           </p>
         </div>
       ) : (
-        <div className="chat w-full h-[80vh] overflow-y-auto  px-2">
+        <div className="chat w-full h-[75vh] overflow-y-auto  px-2">
           {messages.map((msg, index) => (
             <MessageBubble key={index} sender={msg.role} text={msg.content} />
           ))}

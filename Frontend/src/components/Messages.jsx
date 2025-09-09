@@ -50,7 +50,6 @@ const Messages = () => {
       <div className="w-full flex flex-col items-center justify-center">
         <ChatDisplay messages={messages} />
         <Input onSend={onSend} />
-
       </div>
     </div>
   );

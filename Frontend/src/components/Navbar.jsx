@@ -1,10 +1,13 @@
-import { LogOut } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import LogoutPopup from "./LogoutPopup.jsx";
 import { useState } from "react";
 import axios from "../axios/axiosInstance";
-
+import { setShowSidebar } from "../slices/showSidebar";
+import { useDispatch } from "react-redux";
 export default function Navbar() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
+    const dispatch = useDispatch();
 
     const onConfirm = async () => {
       await axios.post("/auth/logout");
@@ -22,7 +25,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Company Name */}
-          <div className="text-xl text-white uppercase font-bold">
+          <div
+          onClick={() => dispatch(setShowSidebar(false))}
+           className="text-xl flex items-center gap-5 text-white uppercase font-bold">
+            <button className="px-2 aspect-square bg-orange-500 hover:bg-amber-700 cursor-pointer rounded-full">
+              <Menu size={20} />
+            </button>
             Synthra
           </div>
 

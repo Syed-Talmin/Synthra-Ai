@@ -11,7 +11,7 @@ const Input = ({ onSend }) => {
   };
 
   return (
-    <div className="w-full max-w-[50rem] flex items-center gap-3 md:p-3 p-1 bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-lg mb-10">
+    <div className="w-full max-w-[50rem] flex items-center gap-3 md:p-3 p-1 bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-lg mb-25">
       <input
         type="text"
         placeholder="Type a message..."

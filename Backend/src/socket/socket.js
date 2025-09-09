@@ -9,8 +9,7 @@ const initSocketIo = (httpServer) => {
 
   io.use((socket, next) => {
     
-    const token = socket.handshake.headers?.cookie?.split("=")[1] || socket.handshake.headers?.authorization?.split(" ")[1];
-      
+    const token = socket.handshake.headers?.cookie?.split("=")[1] || socket.handshake?.auth?.token?.split(" ")[1];
     if (!token) {
       return next(new Error("Unauthorized"));
     }
