@@ -8,16 +8,19 @@ const initSocketIo = (httpServer) => {
   const io = new Server(httpServer);
 
   io.use((socket, next) => {
-    
-    const token = socket.handshake.headers?.cookie?.split("=")[1] || socket.handshake?.auth?.token?.split(" ")[1];
-    if (!token) {
-      return next(new Error("Unauthorized"));
-    }
-    const decode = jwt.verify(token, process.env.JWT_SECRET);
-    if (decode) {
-      socket.user = { id: decode._id };
-      next();
-    } else {
+    try {
+      const token =
+        socket.handshake.headers?.cookie?.split("=")[1] ||
+        socket.handshake?.auth?.token?.split(" ")[1];
+      if (!token) {
+        return next(new Error("Unauthorized"));
+      }
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      if (decode) {
+        socket.user = { id: decode._id };
+        next();
+      }
+    } catch (error) {
       next(new Error("Unauthorized"));
     }
   });
@@ -26,7 +29,6 @@ const initSocketIo = (httpServer) => {
     console.log("New client connected");
 
     socket.on("ai-message", async (message) => {
-
       const [userMessage, vector] = await Promise.all([
         messageModel.create({
           user: socket.user.id,
@@ -42,29 +44,29 @@ const initSocketIo = (httpServer) => {
           queryVector: vector,
           limit: 3,
           metadata: {
-            userId: { $eq: socket.user.id }
+            userId: { $eq: socket.user.id },
           },
         }),
 
-      messageModel.find({ chatId: message.chatId })
-        .sort({ createdAt: -1 })
-        .limit(10)
-        .lean()
-        .then((messages) => {
-          return messages.reverse();
-        }),
+        messageModel
+          .find({ chatId: message.chatId })
+          .sort({ createdAt: -1 })
+          .limit(10)
+          .lean()
+          .then((messages) => {
+            return messages.reverse();
+          }),
 
         await createMemory({
-        messageId: userMessage._id,
-        vectors: vector,
-        metaData: {
-          userId: socket.user.id,
-          chat: message.chatId,
-          text: message.content,
-        },
-      }),
+          messageId: userMessage._id,
+          vectors: vector,
+          metaData: {
+            userId: socket.user.id,
+            chat: message.chatId,
+            text: message.content,
+          },
+        }),
       ]);
-
 
       const stm = chatHistory.map((msg) => {
         return {
@@ -91,15 +93,14 @@ const initSocketIo = (httpServer) => {
 
       socket.emit("ai-response", aiResponse);
 
-      const [aiMessage,aiVector] = await Promise.all([
+      const [aiMessage, aiVector] = await Promise.all([
         messageModel.create({
-        user: socket.user.id,
-        content: aiResponse,
-        chatId: message.chatId,
-        role: "model",
-      }),
-       generateVector(aiResponse)
-
+          user: socket.user.id,
+          content: aiResponse,
+          chatId: message.chatId,
+          role: "model",
+        }),
+        generateVector(aiResponse),
       ]);
 
       await createMemory({
@@ -111,7 +112,6 @@ const initSocketIo = (httpServer) => {
           text: aiResponse,
         },
       });
-      
     });
 
     socket.on("disconnect", () => {
